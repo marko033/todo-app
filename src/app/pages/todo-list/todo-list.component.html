@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <button
+        class="back-icon-button"
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon"
+        routerLink="/list-of-todo-list"
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Example home icon"
+          fontIcon="keyboard_backspace"
+        ></mat-icon>
+      </button>
+      Todo lists {{ listId }}</mat-card-title
+    >
+    <mat-card-subtitle>Add new task</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <form [formGroup]="formAddTask" (ngSubmit)="addTask()">
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Task name"
+          formControlName="title"
+        />
+
+        @if (formAddTask.status === 'INVALID') {
+        <mat-error>Enter a valid task name!</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Task description"
+          formControlName="description"
+        />
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-button
+        [disabled]="formAddTask.status === 'INVALID'"
+      >
+        Add
+      </button>
+    </form>
+  </mat-card-actions>
+  <mat-card-content>
+    <app-todo-task
+      [listOfTasks]="todoTasks"
+      [listType]="'todoList'"
+      [listOfStates]="['doneList', 'progressList']"
+      [state]="todoSate"
+      (cdkDropListDropped)="dropTask($event)"
+    ></app-todo-task>
+    <app-todo-task
+      [listOfTasks]="progressTasks"
+      [listType]="'progressList'"
+      [listOfStates]="['todoList', 'doneList']"
+      [state]="progressSate"
+      (cdkDropListDropped)="dropTask($event)"
+    ></app-todo-task>
+    <app-todo-task
+      [listOfTasks]="doneTasks"
+      [listType]="'doneList'"
+      [listOfStates]="['todoList', 'progressList']"
+      [state]="doneSate"
+      (cdkDropListDropped)="dropTask($event)"
+    ></app-todo-task>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,18 @@
+<div class="task-container">
+  <h2>{{ state }}</h2>
+
+  <div
+    cdkDropList
+    [id]="listType"
+    [cdkDropListData]="listOfTasks"
+    [cdkDropListConnectedTo]="listOfStates"
+    class="task-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    @for (task of listOfTasks; track $index) {
+    <div class="task-box" cdkDrag>
+      {{ task.title }} - {{ task.description }}
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>List of Todo lists</mat-card-title>
+    <mat-card-subtitle>Add new Todo list</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions>
+    <form [formGroup]="formAddTaskList" (ngSubmit)="addTodoList()">
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Todo list name"
+          formControlName="name"
+        />
+
+        @if (formAddTaskList.status === 'INVALID') {
+        <mat-error>Please enter a valid name, min. 4 characters!</mat-error>
+        }
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-flat-button
+        [disabled]="formAddTaskList.status === 'INVALID'"
+      >
+        Add
+      </button>
+    </form>
+  </mat-card-actions>
+  <mat-card-content>
+    <div
+      cdkDropListd
+      class="todo-list"
+      (cdkDropListDropped)="dropTodoList($event)"
+    >
+      @for (list of todoLists; track $index) {
+      <div class="todo-box" cdkDrag (click)="openTodoList(list.id)">
+        {{ $index + 1 }} - {{ list.name }}
+      </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>
