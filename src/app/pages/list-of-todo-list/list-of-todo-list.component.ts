@@ -7,7 +7,7 @@ import {
   moveItemInArray,
   DragDropModule,
 } from '@angular/cdk/drag-drop';
-import { TodoList } from '../../types/tasks';
+import { ITodoList } from '../../types/tasks.interface';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -40,7 +40,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './list-of-todo-list.component.scss',
 })
 export class ListOfTodoListComponent {
-  todoLists: TodoList[] = [
+  todoLists: ITodoList[] = [
     { id: 1, name: 'Test1' },
     { id: 2, name: 'Test2' },
     { id: 3, name: 'Test3' },

@@ -9,7 +9,7 @@ import {
   CdkDropList,
   DragDropModule,
 } from '@angular/cdk/drag-drop';
-import { TaskState, TodoTask } from '../../types/tasks';
+import { TaskState, ITodoTask } from '../../types/tasks.interface';
 import { TodoTaskComponent } from '../../components/todo-task/todo-task.component';
 import { MatCardModule } from '@angular/material/card';
 import {
@@ -47,7 +47,7 @@ import { RouterLink } from '@angular/router';
 export class TodoListComponent {
   @Input() listId!: number;
 
-  allTasks: TodoTask[] = [
+  allTasks: ITodoTask[] = [
     {
       id: 1,
       title: 'Test1',
@@ -176,11 +176,11 @@ export class TodoListComponent {
     },
   ];
 
-  allTasksFiltredByListId!: TodoTask[];
+  allTasksFiltredByListId!: ITodoTask[];
 
-  todoTasks!: TodoTask[];
-  progressTasks!: TodoTask[];
-  doneTasks!: TodoTask[];
+  todoTasks!: ITodoTask[];
+  progressTasks!: ITodoTask[];
+  doneTasks!: ITodoTask[];
 
   TaskState = TaskState;
   todoSate = TaskState.Todo;
@@ -215,7 +215,7 @@ export class TodoListComponent {
     });
   }
 
-  dropTask(event: CdkDragDrop<TodoTask[]>) {
+  dropTask(event: CdkDragDrop<ITodoTask[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

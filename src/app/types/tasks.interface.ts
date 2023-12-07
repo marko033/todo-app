@@ -3,7 +3,7 @@ export enum TaskState {
   Progress = 'PROGRESS',
   Done = 'DONE',
 }
-export interface TodoTask {
+export interface ITodoTask {
   id: number;
   title: string;
   description: string;
@@ -11,7 +11,7 @@ export interface TodoTask {
   listId: number;
 }
 
-export interface TodoList {
+export interface ITodoList {
   id: number;
   name: string;
 }
