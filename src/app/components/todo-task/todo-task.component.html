@@ -6,6 +6,7 @@
     [id]="listType"
     [cdkDropListData]="listOfTasks"
     [cdkDropListConnectedTo]="listOfStates"
+    [cdkDropListEnterPredicate]="allowDrop"
     class="task-list"
     (cdkDropListDropped)="drop($event)"
   >

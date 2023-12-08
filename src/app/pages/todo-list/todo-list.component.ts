@@ -216,6 +216,8 @@ export class TodoListComponent {
   }
 
   dropTask(event: CdkDragDrop<ITodoTask[]>) {
+    // console.log(`event ${JSON.stringify(event.previousContainer)}`);
+    // console.log(`event ${JSON.stringify(event.container)}`);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
