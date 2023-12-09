@@ -18,10 +18,10 @@ import { UserRoles } from '../../types/user.interface';
   styleUrl: './todo-task.component.scss',
 })
 export class TodoTaskComponent {
-  @Input() listOfTasks!: ITodoTask[];
-  @Input() listType!: string;
-  @Input() listOfStates!: string[];
-  @Input() state!: TaskState;
+  @Input({ required: true }) listOfTasks?: ITodoTask[];
+  @Input({ required: true }) listType?: string;
+  @Input({ required: true }) listOfStates?: string[];
+  @Input({ required: true }) state?: TaskState;
   @Output() cdkDropListDropped = new EventEmitter<CdkDragDrop<ITodoTask[]>>();
 
   constructor(private readonly authService: AuthService) {}

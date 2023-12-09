@@ -20,6 +20,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-list-of-todo-list',
@@ -53,7 +54,10 @@ export class ListOfTodoListComponent {
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private readonly authService: AuthService
+  ) {}
 
   dropTodoList(event: CdkDragDrop<{ id: number; name: string }[]>) {
     moveItemInArray(this.todoLists, event.previousIndex, event.currentIndex);
@@ -61,12 +65,10 @@ export class ListOfTodoListComponent {
   }
 
   openTodoList(id: number) {
-    console.log(id + ' ' + this.todoLists);
     this.router.navigate(['todo-list/' + id]);
   }
 
   addTodoList() {
-    console.log(this.formAddTaskList);
     if (this.formAddTaskList.valid) {
       this.todoLists.push({
         id: this.todoLists.length + 1,
@@ -74,5 +76,9 @@ export class ListOfTodoListComponent {
       });
       this.formAddTaskList.reset();
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

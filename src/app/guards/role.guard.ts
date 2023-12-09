@@ -18,8 +18,8 @@ export const roleGuard: CanActivateFn = (
     return true;
   } else {
     console.error(`Not enough role :(`);
-    // return createUrlTreeFromSnapshot(route, ['/', 'login-page']);
     alert('Not enough role :( !');
+    // return createUrlTreeFromSnapshot(route, ['/', 'login-page']);
     return false;
   }
 };

@@ -45,7 +45,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './todo-list.component.scss',
 })
 export class TodoListComponent {
-  @Input() listId!: number;
+  @Input({ required: true }) listId?: number;
 
   allTasks: ITodoTask[] = [
     {
@@ -193,7 +193,7 @@ export class TodoListComponent {
   });
 
   ngOnInit(): void {
-    this.filterTasksByListId(this.listId);
+    if (this.listId) this.filterTasksByListId(this.listId);
   }
 
   filterTasksByListId(listId: number) {
@@ -216,8 +216,6 @@ export class TodoListComponent {
   }
 
   dropTask(event: CdkDragDrop<ITodoTask[]>) {
-    // console.log(`event ${JSON.stringify(event.previousContainer)}`);
-    // console.log(`event ${JSON.stringify(event.container)}`);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -235,7 +233,7 @@ export class TodoListComponent {
   }
 
   addTask() {
-    if (this.formAddTask.valid) {
+    if (this.formAddTask.valid && this.listId) {
       this.todoTasks.push({
         id: this.allTasks.length + 1,
         title: this.formAddTask.value['title'],

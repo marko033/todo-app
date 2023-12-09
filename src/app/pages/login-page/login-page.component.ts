@@ -34,13 +34,9 @@ export class LoginPageComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(
-    private readonly authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   login() {
-    console.log(this.loginForm);
     const user: IUser = {
       userName: this.loginForm.value['username'],
       password: this.loginForm.value['password'],
@@ -48,6 +44,6 @@ export class LoginPageComponent {
     if (this.loginForm.valid) {
       this.authService.login(user);
     }
-    this.router.navigate(['list-of-todo-list']);
+    // this.router.navigate(['list-of-todo-list']);
   }
 }

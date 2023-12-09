@@ -1,5 +1,6 @@
 <div class="task-container">
   <h2>{{ state }}</h2>
+  @if (listType && listOfTasks && listOfStates) {
 
   <div
     cdkDropList
@@ -16,4 +17,5 @@
     </div>
     }
   </div>
+  }
 </div>
