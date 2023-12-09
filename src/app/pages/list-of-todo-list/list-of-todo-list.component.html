@@ -2,6 +2,16 @@
   <mat-card-header>
     <mat-card-title>List of Todo lists</mat-card-title>
     <mat-card-subtitle>Add new Todo list</mat-card-subtitle>
+    <span class="icon-spacer"></span>
+    <button
+      mat-flat-button
+      class="exit-icon"
+      aria-label="Exit button with icon"
+      (click)="logout()"
+    >
+      Logout
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-actions>
     <form [formGroup]="formAddTaskList" (ngSubmit)="addTodoList()">
@@ -28,7 +38,7 @@
   </mat-card-actions>
   <mat-card-content>
     <div
-      cdkDropListd
+      cdkDropList
       class="todo-list"
       (cdkDropListDropped)="dropTodoList($event)"
     >

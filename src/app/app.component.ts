@@ -8,7 +8,13 @@ import { ListOfTodoListComponent } from './pages/list-of-todo-list/list-of-todo-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, LoginPageComponent, TodoListComponent, ListOfTodoListComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    LoginPageComponent,
+    TodoListComponent,
+    ListOfTodoListComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

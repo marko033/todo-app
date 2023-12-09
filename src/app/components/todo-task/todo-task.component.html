@@ -1,11 +1,13 @@
 <div class="task-container">
   <h2>{{ state }}</h2>
+  @if (listType && listOfTasks && listOfStates) {
 
   <div
     cdkDropList
     [id]="listType"
     [cdkDropListData]="listOfTasks"
     [cdkDropListConnectedTo]="listOfStates"
+    [cdkDropListEnterPredicate]="allowDrop"
     class="task-list"
     (cdkDropListDropped)="drop($event)"
   >
@@ -15,4 +17,5 @@
     </div>
     }
   </div>
+  }
 </div>

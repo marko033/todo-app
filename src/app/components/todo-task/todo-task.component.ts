@@ -1,14 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TaskState, TodoTask } from '../../types/tasks';
+import { TaskState, ITodoTask } from '../../types/tasks.interface';
 import {
   CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
   CdkDrag,
   CdkDropList,
   DragDropModule,
 } from '@angular/cdk/drag-drop';
+import { AuthService } from '../../services/auth.service';
+import { UserRoles } from '../../types/user.interface';
 
 @Component({
   selector: 'app-todo-task',
@@ -18,13 +18,34 @@ import {
   styleUrl: './todo-task.component.scss',
 })
 export class TodoTaskComponent {
-  @Input() listOfTasks!: TodoTask[];
-  @Input() listType!: string;
-  @Input() listOfStates!: string[];
-  @Input() state!: TaskState;
-  @Output() cdkDropListDropped = new EventEmitter<CdkDragDrop<TodoTask[]>>();
+  @Input({ required: true }) listOfTasks?: ITodoTask[];
+  @Input({ required: true }) listType?: string;
+  @Input({ required: true }) listOfStates?: string[];
+  @Input({ required: true }) state?: TaskState;
+  @Output() cdkDropListDropped = new EventEmitter<CdkDragDrop<ITodoTask[]>>();
 
-  drop(event: CdkDragDrop<TodoTask[]>) {
+  constructor(private readonly authService: AuthService) {}
+
+  allowDrop = (drag: any, drop: any) => {
+    if (
+      (drop.id === 'progressList' || drop.id === 'todoList') &&
+      (this.authService.getRole()?.includes(UserRoles.Admin) ||
+        this.authService.getRole()?.includes(UserRoles.Executor))
+    ) {
+      return true;
+    } else if (
+      drop.id === 'doneList' &&
+      (this.authService.getRole()?.includes(UserRoles.Admin) ||
+        this.authService.getRole()?.includes(UserRoles.Executor) ||
+        this.authService.getRole()?.includes(UserRoles.Controller))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  drop(event: CdkDragDrop<ITodoTask[]>) {
     this.cdkDropListDropped.emit(event);
   }
 }
